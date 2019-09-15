@@ -29,7 +29,22 @@ else()
     endif()
 endif()
 
+# Add submodules
 add_subdirectory(opt)
+
+# Locate GTest
+add_subdirectory("${PROJECT_SOURCE_DIR}/opt/googletest" "opt/googletest")
+ 
+# Link runTests with what we want to test and the GTest and pthread library
+macro(package_add_test TESTNAME)
+    add_executable(${TESTNAME} ${ARGN})
+    target_link_libraries(${TESTNAME} gtest gmock gtest_main)
+    add_test(NAME ${TESTNAME} COMMAND ${TESTNAME})
+    set_target_properties(${TESTNAME} PROPERTIES FOLDER tests)
+endmacro()
+
+# Add tests
+package_add_test(tests tests.cpp)
 
 add_executable(example example.cpp)
 target_link_libraries(example ${CPR_LIBRARIES})
