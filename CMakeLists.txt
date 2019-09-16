@@ -49,6 +49,12 @@ endmacro()
 # Add tests
 package_add_test(tests tests.cpp)
 
-add_executable(example example.cpp)
+# link all class/objects
+set(SOURCE_FILES
+        example.cpp
+)
+
+
+add_executable(example ${SOURCE_FILES})
 target_link_libraries(example ${CPR_LIBRARIES})
 include_directories(${CPR_INCLUDE_DIRS} ${JSON_INCLUDE_DIRS})
