@@ -29,6 +29,9 @@ else()
     endif()
 endif()
 
+# enable debugging
+set(CMAKE_BUILD_TYPE Debug)
+
 # Add submodules
 add_subdirectory(opt)
 
